@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+      <% if (locals.topic) { %>
+      <title><%= topic.title %> - <%= config.name %></title>
+      <% } else { %>
+      <title><%= config.nameseo %></title>
+      <% } %>
     <!-- meta -->
-    <meta charset="utf-8" />
-    <meta name='description' content='<%= config.description %>'>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <meta name='description' content='<%= config.description %>'>
     <%
     var headers = config.site_headers || [];
     for (var i = 0, l = headers.length; i < l; i++) {
@@ -12,7 +17,7 @@
     <% } %>
     <link title="RSS" type="application/rss+xml" rel="alternate" href="/rss" />
     <!-- style -->
-    <link rel="stylesheet" type="text/css" href="/libs/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/libs/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link type='text/css' rel='stylesheet' href='/libs/code-prettify/prettify.css' />
     <% if (locals.extra_style) { %>
@@ -22,19 +27,14 @@
     <% } %>
     <script src='/libs/code-prettify/prettify.js'></script>
     <!-- script -->
-    <script src='/libs/jquery/jquery.js'></script>
-    <script src='/libs/bootstrap/js/bootstrap.js'></script>
+    <script src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
+    <script src='/libs/bootstrap/js/bootstrap.min.js'></script>
     <script src='/javascripts/main.js'></script>
     <% if (config.site_enable_search_preview) { %>
     <script>
       var __google_search_domain = '<%= config.site_google_search_domain || "" %>';
     </script>
     <script src='/javascripts/google_search_preview.js'></script>
-    <% } %>
-    <% if (locals.topic) { %>
-    <title><%= topic.title %> - <%= config.name %></title>
-    <% } else { %>
-    <title><%= config.description %></title>
     <% } %>
   </head>
   <body>
@@ -57,9 +57,9 @@
             <% } %>
             <% if (locals.current_user) { %>
             <li>
-              <a href="/user/<%= current_user.name %>" title="查看我的主页"> Me </a>
+              <a href="/user/<%= current_user.name %>" title="查看我的主页"> 我的主页 </a>
             </li>
-            <li><a href='/setting'>设置</a></li>
+            <li><a href='/setting'>个人信息</a></li>
             <li>
               <a href='/signout'>退出</a>
             </li>
@@ -93,7 +93,7 @@
         </div>
         <div class='sep10'></div>
         <div class='col_fade'>
-          &copy; 2013 <br>本社区为开源系统，版本: <%= config.version %><br>
+          &copy; 2013 <%= config.name %> , 官方QQ群: 243864402
         </div>
       </div>
     </div>
